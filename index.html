@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dekem Artificial Inteligent Engine</title>
+<style>
+body{margin:0;font-family:Arial,sans-serif;background:#05070d;color:#fff;display:flex;justify-content:center;align-items:center;min-height:100vh;background-image:radial-gradient(circle at top,#0d1b4d,#05070d 55%);} 
+.container{width:92%;max-width:900px;background:rgba(10,15,30,.9);border:1px solid #1e90ff33;border-radius:24px;box-shadow:0 0 30px #1e90ff33;padding:28px;} 
+.title{font-size:34px;font-weight:800;color:#7fc7ff;text-shadow:0 0 14px #1e90ff;} 
+.sub{color:#9fb7d9;margin-top:6px;margin-bottom:20px;} 
+.chat{height:420px;overflow:auto;background:#0a1020;border-radius:18px;padding:16px;border:1px solid #1e90ff22;} 
+.msg{padding:12px 14px;border-radius:14px;margin:10px 0;max-width:80%;line-height:1.45;} 
+.user{background:#1e90ff;color:#fff;margin-left:auto;} 
+.bot{background:#121a33;color:#dbeaff;} 
+.row{display:flex;gap:10px;margin-top:16px;} 
+input{flex:1;padding:14px 16px;border-radius:14px;border:1px solid #1e90ff44;background:#08101f;color:#fff;} 
+button{padding:14px 20px;border:none;border-radius:14px;background:#1e90ff;color:#fff;font-weight:700;cursor:pointer;box-shadow:0 0 18px #1e90ff66;} 
+button:hover{filter:brightness(1.1);} 
+</style>
+</head>
+<body>
+<div class="container">
+<div class="title">DEKEM Artificial Inteligent Engine</div>
+<div class="sub">Dark mode • Electric Blue Core • Smart Assistant</div>
+<div id="chat" class="chat">
+<div class="msg bot">Halo, aku Dekem AI. Tanya apa aja ke aku.</div>
+</div>
+<div class="row">
+<input id="input" placeholder="Tulis pertanyaan kamu...">
+<button onclick="sendMsg()">Kirim</button>
+</div>
+</div>
+<script>
+async function sendMsg(){
+ const input=document.getElementById('input');
+ const text=input.value.trim(); if(!text) return;
+ add(text,'user'); input.value='';
+ add('Sedang memproses...','bot','typing');
+ setTimeout(()=>{document.querySelector('.typing').remove(); add('Untuk AI asli, sambungkan API OpenAI / Gemini ke website ini. Pertanyaanmu: '+text,'bot');},900);
+}
+function add(t,type,cls=''){
+ const div=document.createElement('div'); div.className='msg '+type+' '+cls; div.textContent=t;
+ document.getElementById('chat').appendChild(div);
+ document.getElementById('chat').scrollTop=999999;
+}
+document.getElementById('input').addEventListener('keydown',e=>{if(e.key==='Enter')sendMsg();});
+</script>
+</body>
+</html>
